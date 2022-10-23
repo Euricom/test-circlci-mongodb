@@ -2,17 +2,17 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/node:14-browsers
+      - image: circleci/node:12-browsers
       - image: circleci/mongo:4.4
         command: mongod --replSet "rs0"
     steps:
       - run:
           name: "Initialize Replica Set"
           command: |
-            sudo wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
-            sudo echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.2 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+            sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
+            echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
             sudo apt-get update
-            sudo apt-get install -y libcurl3 mongodb-org-shell=4.2.0
+            sudo apt-get install -y mongodb-org-shell
       - checkout
       # - run:
       #     name: Init mongo replica set
