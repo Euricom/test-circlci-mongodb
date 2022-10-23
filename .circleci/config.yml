@@ -14,7 +14,7 @@ jobs:
             echo "deb ------------------"
             echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
             echo "apt-get update ------------------"
-            sudo apt-get update
+            sudo apt-get update --allow-unauthenticated
             echo "apt-get install ------------------"
             sudo apt-get install -y mongodb-org-shell --allow-unauthenticated
       - checkout
